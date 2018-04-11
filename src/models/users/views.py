@@ -4,7 +4,6 @@ from src.models.users.user import User
 import src.models.users.errors as UserErrors
 import src.models.users.decorators as user_decorators
 
-__author__ = 'jslvtr'
 
 
 user_blueprint = Blueprint('users', __name__)
@@ -46,7 +45,8 @@ def register_user():
 @user_decorators.requires_login
 def user_alerts():
     user = User.find_by_email(session['email'])
-    return render_template("users/alerts.jinja2", alerts=user.get_alerts())
+    alerts = user.get_alerts()
+    return render_template("users/alerts.jinja2", alerts=alerts)
 
 
 @user_blueprint.route('/logout')

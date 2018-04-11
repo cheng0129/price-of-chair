@@ -5,7 +5,6 @@ from src.common.database import Database
 import src.models.alerts.constants as AlertConstants
 from src.models.items.item import Item
 
-__author__ = 'jslvtr'
 
 
 class Alert(object):
@@ -28,7 +27,7 @@ class Alert(object):
                 "from": AlertConstants.FROM,
                 "to": self.user_email,
                 "subject": "Price limit reached for {}".format(self.item.name),
-                "text": "We've found a deal! ({}).".format(self.item.url)
+                "text": "We've found a deal! ({}). To navigate to the alert, visit {}".format(self.item.url, "http://pricing.cheng.com/alerts/{}".format(self._id))
             }
         )
 

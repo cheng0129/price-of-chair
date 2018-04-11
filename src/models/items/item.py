@@ -6,8 +6,6 @@ from src.common.database import Database
 import src.models.items.constants as ItemConstants
 from src.models.stores.store import Store
 
-__author__ = 'jslvtr'
-
 
 class Item(object):
     def __init__(self, name, url, price=None, _id=None):
@@ -26,7 +24,11 @@ class Item(object):
         request = requests.get(self.url)
         content = request.content
         soup = BeautifulSoup(content, "html.parser")
+        # print(self.tag_name)
+        # print(self.query)
         element = soup.find(self.tag_name, self.query)
+        # print(element)
+
         string_price = element.text.strip()
 
         pattern = re.compile("(\d+.\d+)")

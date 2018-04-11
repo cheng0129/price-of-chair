@@ -4,8 +4,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 
 from src.models.stores.store import Store
 
-__author__ = 'jslvtr'
-
+import src.models.users.decorators as user_decorators
 
 store_blueprint = Blueprint('stores', __name__)
 
@@ -17,6 +16,7 @@ def index():
 
 
 @store_blueprint.route('/new', methods=['GET', 'POST'])
+@user_decorators.requires_admin_permissions
 def create_store():
     if request.method == 'POST':
         name = request.form['name']
@@ -31,7 +31,9 @@ def create_store():
 
 
 @store_blueprint.route('/edit/<string:store_id>', methods=['GET', 'POST'])
+@user_decorators.requires_admin_permissions
 def edit_store(store_id):
+    store = Store.get_by_id(store_id)
     if request.method == 'POST':
         name = request.form['name']
         url_prefix = request.form['url_prefix']
@@ -50,15 +52,15 @@ def edit_store(store_id):
         return redirect(url_for('.index'))
 
     # What happens if it's a GET request
-    return render_template("stores/edit_store.jinja2", store=Store.get_by_id(store_id))
+    return render_template("stores/edit_store.jinja2", store=store)
 
 
 @store_blueprint.route('/delete/<string:store_id>')
+@user_decorators.requires_admin_permissions
 def delete_store(store_id):
     Store.get_by_id(store_id).delete()
-
+    return redirect(url_for('.index'))
 
 @store_blueprint.route('/<string:store_id>')
 def store_page(store_id):
     return render_template('stores/store.jinja2', store=Store.get_by_id(store_id))
-

@@ -1,8 +1,6 @@
 from passlib.hash import pbkdf2_sha512
 import re
 
-__author__ = 'jslvtr'
-
 
 class Utils(object):
 

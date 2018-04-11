@@ -3,7 +3,6 @@ from src.common.database import Database
 import src.models.stores.constants as StoreConstants
 import src.models.stores.errors as StoreErrors
 
-__author__ = 'jslvtr'
 
 
 class Store(object):
