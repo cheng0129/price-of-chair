@@ -46,7 +46,9 @@ def register_user():
 def user_alerts():
     user = User.find_by_email(session['email'])
     alerts = user.get_alerts()
-    return render_template("users/alerts.jinja2", alerts=alerts)
+    newalerts = sorted(alerts, key=lambda alert: alert.price_limit)
+
+    return render_template("users/alerts.jinja2", alerts=newalerts)
 
 
 @user_blueprint.route('/logout')
