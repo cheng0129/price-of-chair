@@ -27,8 +27,8 @@ class Alert(object):
                 "from": AlertConstants.FROM,
                 "to": self.user_email,
                 "subject": "Price limit reached for {}".format(self.item.name),
-                "text": "We've found a deal! ({}). To navigate to the alert, visit {}".format(self.item.url, "http://pricing.cheng.com/alerts/{}".format(self._id))
-            }
+                "text": "We've found a deal! ({}). To navigate to the alert, visit {}".format(self.item.url, "http://http://198.199.90.175//alerts/{}".format(self._id))
+            }, verify = False
         )
 
     @classmethod
