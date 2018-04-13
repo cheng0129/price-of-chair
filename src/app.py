@@ -11,7 +11,7 @@ app.secret_key = "123"
 def init_db():
     Database.initialize()
 
-alert_updater.runASample()
+# alert_updater.runASample()
 
 @app.route('/')
 def home():
